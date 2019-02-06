@@ -21,10 +21,14 @@
 # grep is used to filter ip command output so we don't have extra junk in our output
 # stream editing with sed and awk are used to extract only the data we want displayed
 
+myhostname = $(hostname)
+myLanip=$(ip a s ens33|grep 'inet '|awk '{print $2}'|sed 's,/.*,,')
+mylanname=$(getent hosts mylanip | awk '{print $2}')
+
 echo "
-Hostname      : $(hostname)
-LAN Address   : $(ip a s ens33|grep 'inet '|awk '{print $2}'|sed 's,/.*,,')
-LAN Name      : $(getent hosts `ip a s ens33|grep 'inet '|awk '{print $2}'|sed 's,/.*,,'` | awk '{print $2}')
+Hostname      : $myhostname
+LAN Address   : $myLanip
+LAN Name      : $mylanname
 External IP   : $(curl -s icanhazip.com)
 External Name : $(getent hosts `curl -s icanhazip.com` | awk '{print $2}')
 "
