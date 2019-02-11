@@ -15,12 +15,11 @@
 title="Overlord"
 myname=$USER
 hostname=$(hostname)
-times=$(date +%r) 
+times=$(date +%r)
 days=$(date +%A)
 ###############
 # Main        #
 ###############
 cat <<EOF
-
 Welcome to planet $hostname, "$title $myname! $times $days ",
 EOF
