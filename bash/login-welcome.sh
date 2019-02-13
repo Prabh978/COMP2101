@@ -15,12 +15,14 @@
 title="Overlord"
 myname=$USER
 hostname=$(hostname)
-times=$(date +%r)
-days=$(date +%A)
+time=$(date +%H:%M%p)
+weekday=$(date +%A)
 ###############
 # Main        #
 ###############
-cat <<EOF
+output=`cat <<EOF
 
-Welcome to planet $hostname, "$title $myname! $times $days ",
-EOF
+Welcome to planet $hostname, "$title $myname!"
+It is $time on $weekday
+EOF`
+echo `cowsay $output`

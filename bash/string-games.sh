@@ -28,9 +28,13 @@ echo "========silly text lines with the string 'hello'========"
 grep hello <<< "$somesillytext"
 echo "=========================="
 
+#Task-2
 grep -w "hello" <<< "$somesillytext"
+#Task-3
 grep "^I" <<< "$somesillytext"
+#Task-4
 grep "[^.]$" <<< "$somesillytext"
+#Task-5
 grep "^$" <<< "$somesillytext"
 
 # this 'tr' command will remove extra spaces from the text in the somesillytext variable
@@ -39,6 +43,7 @@ echo "========Extra spaces removed========"
 tr -s ' ' <<< "$somesillytext"
 echo "=========================="
 
+#Task-6
 tr [a-z] [A-Z] <<< "$somesillytext"
 
 # this pipeline runs ip to show configured ip addresses in brief mode
@@ -50,7 +55,9 @@ echo "========Interface Names using cut with a space as delimiter========"
 ip -br a s| cut -d ' ' -f 1
 echo "=========================="
 
+#Task-7
 ip -br a s| awk '{print $1}'
+#Task-8
 ip -br a s| grep -Eo '^[^ ]+'
 
 # this pipeline uses the find command to find regular files
@@ -60,6 +67,7 @@ ip -br a s| grep -Eo '^[^ ]+'
 # TASK 9: Modify the grep to find both JPEG and PNG files
 echo "=========PNG files========"
 find ~ -type f -exec file {} \; 2> /dev/null |
+#Task-9
     grep ": PNG\|: JPEG" |
     awk '{print $1, $2}' |
     head
@@ -73,4 +81,5 @@ echo "=========================="
 find /bin /usr/bin -type f -executable -perm -4000 -ls 2>/dev/null | sort -k 5 | head
 echo "=========================="
 
+#Task-10
 find /bin /usr/bin -type f -executable -perm -2000 -ls 2>/dev/null | sort -k 5 | head
