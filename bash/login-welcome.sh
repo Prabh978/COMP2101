@@ -25,4 +25,4 @@ output=`cat <<EOF
 Welcome to planet $hostname, "$title $myname!"
 It is $time on $weekday
 EOF`
-echo `cowsay $output`
+echo "$(cowsay $output)"
