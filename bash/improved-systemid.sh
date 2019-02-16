@@ -38,13 +38,13 @@ default_router_name=$(getent hosts $default_router_address|awk '{print $2}')
 
 # the network address can be easily pulled from the route table with the ip route list command
 # the network name can be looked up with the getent command
-interface_network_address=$(ip route list dev $interface scope link|cut -d ' ' -f 1)
+interface_network_address=$(ip route list dev $interface scope link|cut -d ' ' -f 1|sed -n 2p)
 interface_network_number=$(cut -d / -f 1 <<<"$interface_network_address")
-interface_network_name=$(getent networks $interface_network_number|awk '{print $1}')
+interface_network_name=$(getent networks $interface_network_number|head -n 1|awk '{print $1}')
 
 # finding external information relies on curl being installed and relies on live internet connection
-external_address=$(curl -s icanhazip.com)
-external_name=$(getent hosts $external_address | awk '{print $2}')
+external_address=$(curl -s icanhazip.com|awk '{print $1}')
+external_name=$(getent hosts $external_address |awk '{print $2}')
 
 
 echo "
