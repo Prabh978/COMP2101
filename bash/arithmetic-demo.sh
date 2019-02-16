@@ -9,8 +9,8 @@
 #   - first divided by second gives X with a remainder of Y
 # Improve this script by calculating and displaying the first number raised to the power of the second number
 
-firstnum=15
-secondnum=7
+read -p "Enter First Number:" firstnum
+read -p "Enter Second Number:" secondnum
 subtarct=$((firstnum - secondnum))
 multiply=$((firstnum * secondnum))
 modulus=$((firstnum % secondnum))
