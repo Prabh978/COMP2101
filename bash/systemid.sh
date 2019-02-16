@@ -25,6 +25,7 @@
 myhostname=$(hostname)
 myLanip=$(ip a s ens33|grep 'inet '|awk '{print $2}'|sed 's,/.*,,')
 myLanname=$(ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}'get)
+netNumb=$(ip r s | tail -n 1 |sed 's,/.*,,')
 
 echo "
 Hostname      : $myhostname
@@ -33,6 +34,8 @@ LAN Name      : $myLanname
 External IP   : $(curl -s icanhazip.com)
 External Name : $(getent hosts `curl -s icanhazip.com` | awk '{print $2}')
 Router IP     : $(ip route list default|awk '{print$3}')
-Router Name   : $(ip route list default|awk '{print $1}')
+Router Name   : $(ip route list default|awk '{print $4}')
+Network Num   : $netNumb
+Network Name  : $(getent networks $netNumb | awk '{print $1}')
 "
 
